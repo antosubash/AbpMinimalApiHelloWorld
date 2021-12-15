@@ -4,7 +4,6 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
 using Volo.Abp.Modularity;
 using Volo.Abp.DependencyInjection;
-
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.AddAppSettingsSecretsJson()
     .UseAutofac();
@@ -12,9 +11,9 @@ builder.Services.ReplaceConfiguration(builder.Configuration);
 builder.Services.AddApplication<MinimalModule>();
 var app = builder.Build();
 
-app.MapGet("/hi", ([FromServices] HelloService repository) =>
+app.MapGet("/hi", ([FromServices] HelloService helloService) =>
 {
-    return repository.SayHi();
+    return helloService.SayHi();
 });
 
 app.InitializeApplication();
